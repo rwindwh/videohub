@@ -13,7 +13,7 @@ import java.io.IOException;
 public class LoginRouter implements Registrable {
     @Override
     public void registerRouter() {
-        Router.get("/", (request, response) -> {
+        Router.get("/checkcode", (request, response) -> {
             try {
                 request.setCharacterEncoding("UTF-8");
                 response.setContentType("image/jpeg");
@@ -63,6 +63,30 @@ public class LoginRouter implements Registrable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        });
+        Router.post("/changecheckcode",(request,reponse)->{
+            try{
+                request.getRequestDispatcher("login.jsp").forward(request,reponse);
+            }catch (Exception e)
+            {e.printStackTrace();}
+        });
+        Router.post("/logcheck",(request,response)->{
+            try {
+                request.setCharacterEncoding("UTF-8");
+                String usercheckcode=request.getParameter("checkCode");
+                HttpSession session=request.getSession();
+                String severcheckcode=(String)session.getAttribute("checkcode");
+                if(!severcheckcode.equalsIgnoreCase(usercheckcode))
+                {
+                    response.sendRedirect("/error");
+
+                }
+                else
+                {
+                    response.sendRedirect("/ok");
+                }
+            }catch (Exception e)
+            {e.printStackTrace();}
         });
     }
 }
