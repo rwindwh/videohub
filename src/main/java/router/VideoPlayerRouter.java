@@ -9,7 +9,8 @@ public class VideoPlayerRouter implements Registrable {
     public void registerRouter() {
         Router.get("/video_player", (req, resp) -> {
             try {
-                resp.getWriter().println("index page");
+                resp.sendRedirect("video_player.jsp");
+                //resp.getWriter().println("video_player.jsp");
             } catch (IOException e) {
                 e.printStackTrace();
             }
