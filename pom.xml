@@ -39,7 +39,7 @@
         <dependency>
             <groupId>com.github.racaljk</groupId>
             <artifactId>sparrow</artifactId>
-            <version>1.0.1-snapshot</version>
+            <version>1.0.3-snapshot</version>
         </dependency>
     </dependencies>
 </project>

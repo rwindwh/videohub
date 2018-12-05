@@ -1,1 +1,0 @@
-<p>this demo illustrate how to use jsp in sparrow</p>

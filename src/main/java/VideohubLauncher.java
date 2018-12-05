@@ -1,19 +1,16 @@
 import core.Sparrow;
+import mvc.Model;
 import mvc.Router;
 import mvc.View;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
 public class VideohubLauncher {
     public static void main(String[] args) {
-        Router.get("/hello", (HttpServletRequest req, HttpServletResponse resp) -> {
-            try {
-                resp.getWriter().println("<p color=\"blue\">Hello videohub</p>");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
+        Router.post("/loginCheck", (Model model) -> {
+            String username = (String) model.get("username");
+            String password = (String) model.get("password");
+            model.set("a","bb");
+            return username.equals("a") && password.equals("b")?View.create("/ok"):View.create("/error");
         });
         Router.get("/test", model -> View.create("test.jsp"));
         Sparrow.fly();
