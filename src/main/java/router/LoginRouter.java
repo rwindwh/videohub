@@ -92,6 +92,7 @@ public class LoginRouter implements Registrable {
                 });
                 if (severcheckcode.equalsIgnoreCase(usercheckcode) && username.equals(username1) && password.equals(password1)) {
                     response.sendRedirect("/main.jsp");
+                    request.getSession().setAttribute("username",username);
                 } else {
                     response.sendRedirect("/loginfalse.jsp");
                 }
@@ -116,7 +117,7 @@ public class LoginRouter implements Registrable {
                     DBTemplate.queryOne("insert into videohub_user(username,password,avatar_url,email,point,last_login_time) value('" + username + "','" + password + "',null,'" + email + "',200,'" + Date + "')",
                             result -> {
                             });
-                    request.getSession().setAttribute("registersuccess", true);
+                    request.getSession().setAttribute("username", username);
 
                     response.sendRedirect("/ok");
 
@@ -129,6 +130,7 @@ public class LoginRouter implements Registrable {
                 e.printStackTrace();
             }
         });
+
     }
 }
 
