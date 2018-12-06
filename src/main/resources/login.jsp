@@ -1,16 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<head>
 <title>Login</title>
-<style>
-
-    .child {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin-top: -300px;
-        margin-left: -200px;
-    }
-
-</style>
+    <link rel="stylesheet" href="tempalate.css"/>
+</head>
+<body>
 <div class="child">
 <form  method="post" name="form1">
     <h1>Username: <label><input style="height: 30px;width: 200px" name="username" type="text"/></label><br/></h1>
@@ -23,3 +16,4 @@
     <div align="center"><a href="register.jsp">注册</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="forgetpassword.jsp">忘记密码？</a></div>
 </form>
 </div>
+</body>
