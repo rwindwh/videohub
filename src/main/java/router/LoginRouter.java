@@ -2,7 +2,6 @@ package router;
 
 import database.DBTemplate;
 import mvc.Router;
-import mvc.View;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -86,7 +85,7 @@ public class LoginRouter implements Registrable {
                 String password = request.getParameter("password");
                 HttpSession session = request.getSession();
                 String severcheckcode = (String) session.getAttribute("checkcode");
-                DBTemplate.queryOne("select username,password from videohub_user where username='" + username + "'", result -> {
+                DBTemplate.query("select username,password from videohub_user where username='" + username + "'", result -> {
                     username1 = result.getString("username");
                     password1 = result.getString("password");
                 });
@@ -117,12 +116,12 @@ public class LoginRouter implements Registrable {
                 String email = request.getParameter("email");
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
                 String Date = simpleDateFormat.format(new Date());
-                DBTemplate.queryOne("select username from videohub_user where username=?" ,new Object[]{username}, result -> {
+                DBTemplate.query("select username from videohub_user where username=?", new Object[]{username}, result -> {
 
                     username2 = result.getString("username");
                 });
                 if (username2 != username) {
-                    DBTemplate.queryOne("insert into videohub_user(username,password,avatar_url,email,point,last_login_time) value('ee','123456',null,'14@qq.com',200,'2018-12-7-10-02')",
+                    DBTemplate.query("insert into videohub_user(username,password,avatar_url,email,point,last_login_time) value('ee','123456',null,'14@qq.com',200,'2018-12-7-10-02')",
                             result -> {
                             });
                     request.getSession().setAttribute("username", username);
