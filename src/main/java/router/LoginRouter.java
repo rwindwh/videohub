@@ -2,9 +2,7 @@ package router;
 
 import database.DBTemplate;
 import mvc.Router;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import mvc.View;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -13,6 +11,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class LoginRouter implements Registrable {
@@ -22,6 +22,8 @@ public class LoginRouter implements Registrable {
 
     @Override
     public void registerRouter() {
+        Router.get("/login", model -> View.create("/login.jsp"));
+
         Router.get("/checkcode", (request, response) -> {
             try {
                 request.setCharacterEncoding("UTF-8");
