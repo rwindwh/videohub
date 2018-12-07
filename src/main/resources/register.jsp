@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
 <title>Register</title>
-    <link rel="stylesheet" href="tempalate.css">
+    <link rel="stylesheet" href="css/template.css">
 </head>
 <body>
 <h1 align="center">Please input some messages into the register form！</h1>
