@@ -1,6 +1,7 @@
 package router;
 
 import mvc.Router;
+import mvc.View;
 
 import java.io.IOException;
 
@@ -15,5 +16,7 @@ public class VideoPlayerRouter implements Registrable {
                 e.printStackTrace();
             }
         });
+
+        Router.get("/play", model -> View.create("video_player.jsp"));
     }
 }
