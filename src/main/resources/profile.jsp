@@ -6,7 +6,7 @@
 <body>
    <div align="center">
        <img src="/image/1.jpg"><br>
-       <a href="/changepicture">切换头像</a>
+       <a href="/changepicture">change the avatar</a>
    </div>
    <hr width="100%" size="1">
    <hr width="100%" size="1" >
@@ -20,7 +20,7 @@
    <hr width="100%" size="1">
    <hr width="100%" size="1" >
    <div align="center" style="" >
-       <a href="/invest.jsp">invest</a>
+       <a href="/pay.jsp">pay</a>
    </div>
 
 </body>

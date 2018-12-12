@@ -39,7 +39,12 @@
         <dependency>
             <groupId>com.github.racaljk</groupId>
             <artifactId>sparrow</artifactId>
-            <version>1.0.7-snapshot</version>
+            <version>1.0.9-snapshot</version>
+        </dependency>
+        <dependency>
+            <groupId>org.java-websocket</groupId>
+            <artifactId>Java-WebSocket</artifactId>
+            <version>1.3.0</version>
         </dependency>
     </dependencies>
 </project>

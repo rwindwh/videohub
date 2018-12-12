@@ -2,7 +2,6 @@ package router;
 
 import database.DBTemplate;
 import mvc.Router;
-import mvc.View;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -22,8 +21,6 @@ public class LoginRouter implements Registrable {
 
     @Override
     public void registerRouter() {
-        Router.get("/login", model -> View.create("/login.jsp"));
-
         Router.get("/checkcode", (request, response) -> {
             try {
                 request.setCharacterEncoding("UTF-8");
@@ -88,7 +85,7 @@ public class LoginRouter implements Registrable {
                 String password = request.getParameter("password");
                 HttpSession session = request.getSession();
                 String severcheckcode = (String) session.getAttribute("checkcode");
-                DBTemplate.queryOne("select username,password from videohub_user where username='" + username + "'", result -> {
+                DBTemplate.query("select username,password from videohub_user where username='" + username + "'", result -> {
                     username1 = result.getString("username");
                     password1 = result.getString("password");
                 });
@@ -96,7 +93,15 @@ public class LoginRouter implements Registrable {
                     response.sendRedirect("/main.jsp");
                     request.getSession().setAttribute("username",username);
                 } else {
-                    response.sendRedirect("/loginfalse.jsp");
+                    String finalReson  = "Login false:";
+                    if(!username1.equals(username))
+                        finalReson+="The username does not exist! ";
+                    if(!password1.equals(password))
+                         finalReson+="The password is incorrect! ";
+                    if(!severcheckcode.equalsIgnoreCase(usercheckcode))
+                        finalReson+="The captcha is incorrect!";
+
+                    response.sendRedirect("/login.jsp?error=yes&reason="+finalReson);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -111,12 +116,12 @@ public class LoginRouter implements Registrable {
                 String email = request.getParameter("email");
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
                 String Date = simpleDateFormat.format(new Date());
-                DBTemplate.queryOne("select username from videohub_user where username=?" ,new Object[]{username}, result -> {
+                DBTemplate.query("select username from videohub_user where username=?", new Object[]{username}, result -> {
 
                     username2 = result.getString("username");
                 });
                 if (username2 != username) {
-                    DBTemplate.queryOne("insert into videohub_user(username,password,avatar_url,email,point,last_login_time) value('" + username + "','" + password + "',null,'" + email + "',200,'" + Date + "')",
+                    DBTemplate.query("insert into videohub_user(username,password,avatar_url,email,point,last_login_time) value('ee','123456',null,'14@qq.com',200,'2018-12-7-10-02')",
                             result -> {
                             });
                     request.getSession().setAttribute("username", username);
@@ -124,6 +129,7 @@ public class LoginRouter implements Registrable {
                     response.sendRedirect("/ok");
 
                 }
+
                 else
                 {
                     response.sendRedirect("/repeat.jsp");
