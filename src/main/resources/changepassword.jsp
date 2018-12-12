@@ -15,4 +15,14 @@
     </form>
 </div>
 </body>
+<dialog id="2"><%=request.getParameter("reason")%></dialog>
 </html>
+<script>
+    var errori='<%=request.getParameter("error")%>'
+    if(errori=='yes')
+    {
+        document.getElementById("2").showModal();
+
+    }
+
+</script>

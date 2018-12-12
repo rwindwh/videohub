@@ -5,6 +5,7 @@ import mvc.Router;
 import tool.MailWorker;
 
 import javax.imageio.ImageIO;
+import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpSession;
 import java.awt.*;
@@ -147,10 +148,11 @@ public class LoginRouter implements Registrable {
                 int a = (int) (Math.random() * 36);
                 captcha[i] = chars.charAt(a);
             }
-            String context = String.valueOf(captcha);
+            String Captcha=String.valueOf(captcha);
+            String context ="The captcha is :"+Captcha;
             new MailWorker().sendMailAsync("captcha", context, email);
             try {
-                request.getSession().setAttribute("captcha", context);
+                request.getSession().setAttribute("captcha", Captcha);
                 request.getSession().setAttribute("email",email);
                 response.sendRedirect("/changepassword.jsp");
             } catch (Exception e) {
@@ -169,6 +171,13 @@ public class LoginRouter implements Registrable {
                 DBTemplate.update("update videohub_user set password=? where email=?",new Object[]{
                         password,email
                 });
+                try {
+                    request.getRequestDispatcher("/login.jsp").forward(request,reponse);
+                } catch (ServletException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
             else
             {
