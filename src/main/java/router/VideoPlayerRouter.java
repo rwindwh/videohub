@@ -8,13 +8,9 @@ import java.io.IOException;
 public class VideoPlayerRouter implements Registrable {
     @Override
     public void registerRouter() {
-        Router.get("/video_player", (req, resp) -> {
-            try {
-                resp.sendRedirect("video_player.jsp");
-                //resp.getWriter().println("video_player.jsp");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        Router.get("/video_player/{videoUrl}",model -> {
+            model.set("videoUrl",model.getPathVar("videoUrl"));
+            return View.create("video_play.jsp");
         });
 
         Router.get("/play", model -> View.create("video_player.jsp"));
