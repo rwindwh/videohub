@@ -8,9 +8,8 @@ import java.io.IOException;
 public class VideoPlayerRouter implements Registrable {
     @Override
     public void registerRouter() {
-        Router.get("/video_player/{videoUrl}/{username}",model -> {
-            //model.set("video_id",model.getPathVar("videoUrl"));
-            //model.set("username",model.getPathVar("username"));
+        Router.get("/video_player/{videoUrl}",model -> {
+            model.set("videoUrl",model.getPathVar("videoUrl"));
             return View.create("video_play.jsp");
         });
 
