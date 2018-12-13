@@ -2,8 +2,10 @@ package router;
 
 import database.DBTemplate;
 import mvc.Router;
+import tool.MailWorker;
 
 import javax.imageio.ImageIO;
+import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpSession;
 import java.awt.*;
@@ -86,22 +88,23 @@ public class LoginRouter implements Registrable {
                 HttpSession session = request.getSession();
                 String severcheckcode = (String) session.getAttribute("checkcode");
                 DBTemplate.query("select username,password from videohub_user where username='" + username + "'", result -> {
+                    if(result.next()){
                     username1 = result.getString("username");
-                    password1 = result.getString("password");
+                    password1 = result.getString("password");}
                 });
                 if (severcheckcode.equalsIgnoreCase(usercheckcode) && username.equals(username1) && password.equals(password1)) {
                     response.sendRedirect("/main.jsp");
-                    request.getSession().setAttribute("username",username);
+                    request.getSession().setAttribute("username", username);
                 } else {
-                    String finalReson  = "Login false:";
-                    if(!username1.equals(username))
-                        finalReson+="The username does not exist! ";
-                    if(!password1.equals(password))
-                         finalReson+="The password is incorrect! ";
-                    if(!severcheckcode.equalsIgnoreCase(usercheckcode))
-                        finalReson+="The captcha is incorrect!";
+                    String finalReson = "Login false:";
+                    if (!username1.equals(username))
+                        finalReson += "The username does not exist! ";
+                    if (!password1.equals(password))
+                        finalReson += "The password is incorrect! ";
+                    if (!severcheckcode.equalsIgnoreCase(usercheckcode))
+                        finalReson += "The captcha is incorrect!";
 
-                    response.sendRedirect("/login.jsp?error=yes&reason="+finalReson);
+                    response.sendRedirect("/login.jsp?error=yes&reason=" + finalReson);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -118,24 +121,76 @@ public class LoginRouter implements Registrable {
                 String Date = simpleDateFormat.format(new Date());
                 DBTemplate.query("select username from videohub_user where username=?", new Object[]{username}, result -> {
 
+                    if(result.next())
                     username2 = result.getString("username");
                 });
                 if (username2 != username) {
-                    DBTemplate.query("insert into videohub_user(username,password,avatar_url,email,point,last_login_time) value('ee','123456',null,'14@qq.com',200,'2018-12-7-10-02')",
-                            result -> {
-                            });
+                    DBTemplate.insert("insert into videohub_user(username,password,avatar_url,email,point,last_login_time) value(?,?,?,?,?,?)",new Object[]{
+                            username,password,null,email,200,Date
+                    });
                     request.getSession().setAttribute("username", username);
 
                     response.sendRedirect("/ok");
 
-                }
-
-                else
-                {
+                } else {
                     response.sendRedirect("/repeat.jsp");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+        });
+        Router.post("/sendtheemail", (request, response) ->
+        {
+            String email = request.getParameter("email");
+            char[] captcha = new char[6];
+            String chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            for (int i = 0; i < 6; i++) {
+                int a = (int) (Math.random() * 36);
+                captcha[i] = chars.charAt(a);
+            }
+            String Captcha=String.valueOf(captcha);
+            String context ="The captcha is :"+Captcha;
+            new MailWorker().sendMailAsync("captcha", context, email);
+            try {
+                request.getSession().setAttribute("captcha", Captcha);
+                request.getSession().setAttribute("email",email);
+                response.sendRedirect("/changepassword.jsp");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        Router.post("/changepassword",(request,reponse)->
+        {
+            String password=request.getParameter("password");
+            String password3=request.getParameter("password1");
+            String captcha=request.getParameter("captcha");
+            String sessioncaptcha=(String)request.getSession().getAttribute("captcha");
+            String email=(String)request.getSession().getAttribute("email");
+            if(captcha.equalsIgnoreCase(sessioncaptcha)&&password.equals(password3))
+            {
+                DBTemplate.update("update videohub_user set password=? where email=?",new Object[]{
+                        password,email
+                });
+                try {
+                    request.getRequestDispatcher("/login.jsp").forward(request,reponse);
+                } catch (ServletException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            else
+            {
+               String reason="False:";
+               if(!password.equals(password3))
+               reason+="The password entered for the second time is different from that entered for the first time!";
+               if(!captcha.equalsIgnoreCase(sessioncaptcha))
+               reason+="The The captcha is incorrect!";
+                try {
+                    reponse.sendRedirect("/changepassword.jsp?error=yes&reason="+reason);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
