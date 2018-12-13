@@ -33,6 +33,7 @@ Body{
 }
 .message_area{
     background-color: #e5e5e5;
+    font-size: 24px;
     width: 100%;
 }
 li{
