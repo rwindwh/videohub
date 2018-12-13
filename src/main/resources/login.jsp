@@ -142,8 +142,17 @@
         <div><label>
             <input type="checkbox" name="rememberMe" id = "rememberMe"> 记住密码
         </label></div>
-    <div   style=" display: inline;margin:0 50px;border:0;padding:0;"><input value="登录" style="width: 100px;height: 50px;margin-bottom: 20px"type="submit" onmouseup="form1.action='/logcheck'"></div>
-        <div  style="display: inline"><input type="submit"  style="width: 100px;height: 50px;margin-bottom: 20px" onclick="/changecheckcode'" value="换一张"></div>
+    <div  style=" display: inline;margin:0 50px;border:0;padding:0;"><input value="登录" style=" opacity: 0.8;
+            background-color: #ffffff;
+            box-shadow: 10px 10px 5px #888888;border:2px solid;
+            border-radius:25px;
+            -moz-border-radius:25px;width: 100px;height: 50px;margin-bottom: 20px"type="submit" onmouseup="form1.action='/logcheck'"></div>
+        <div   style="display: inline"><input type="submit"  style="
+         opacity: 0.8;
+            background-color: #ffffff;
+            box-shadow: 10px 10px 5px #888888;border:2px solid;
+            border-radius:25px;
+            -moz-border-radius:25px;width: 100px;height: 50px;margin-bottom: 20px" onclick="/changecheckcode'" value="换一张"></div>
     <div align="center"><a href="register.jsp">注册</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="forgetpassword.jsp">忘记密码？</a></div>
     </form>
 </div>
