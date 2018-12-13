@@ -47,7 +47,7 @@
             position: relative;
         }
         #wrap .logGet {
-            height: 408px;
+            height: 530px;
             width: 368px;
             position: absolute;
             opacity: 0.8;
@@ -113,6 +113,13 @@
             margin-right: auto;
             margin-left: auto;
         }
+
+        #wrap .logGet .lgB {
+            margin-bottom: 30px;
+            margin-top: 30px;
+            margin-right: auto;
+            margin-left: auto;
+        }
    #wrap .logGet .lgA {
             width: 86%;
             position: relative;
@@ -140,7 +147,7 @@
             <input type="text" name="checkCode" placeholder="输入验证码"/>
         </div>
         <div><label>
-            <input type="checkbox" name="rememberMe" id = "rememberMe"> 记住密码
+            <input class="lgB" type="checkbox" name="rememberMe" id="rememberMe"> 记住密码
         </label></div>
     <div  style=" display: inline;margin:0 50px;border:0;padding:0;"><input value="登录" style=" opacity: 0.8;
             background-color: #ffffff;
