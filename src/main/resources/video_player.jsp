@@ -7,9 +7,9 @@
     <script src="//vjs.zencdn.net/7.3.0/video.min.js"></script>
 
     <script src="/js/ws_comment.js"></script>
+    <script src="/js/video_player.js"></script>
 </head>
 <body class="BG" background="/image/videoBG.jpg">
-
 <div>
     <ul class="top-action">
         <li class="top-action-name">
@@ -39,9 +39,9 @@
                     preload="auto"
                     poster="//vjs.zencdn.net/v/oceans.png"
                     data-setup='{}'>
-                <source src="//vjs.zencdn.net/v/oceans.mp4" type="video/mp4"></source>
-                <source src="//vjs.zencdn.net/v/oceans.webm" type="video/webm"></source>
-                <source src="//vjs.zencdn.net/v/oceans.ogv" type="video/ogg"></source>
+                <source src="<%=request.getAttribute("video")%>.mp4" type="video/mp4"></source>
+                <source src="<%=request.getAttribute("video")%>.webm" type="video/webm"></source>
+                <source src="<%=request.getAttribute("video")%>.ogv" type="video/ogg"></source>
                 <p class="vjs-no-js">
                     To view this video please enable JavaScript, and consider upgrading to a
                     web browser that
