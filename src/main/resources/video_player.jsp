@@ -5,6 +5,7 @@
     <link href="//vjs.zencdn.net/7.3.0/video-js.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./css/video_player.css" media="all">
     <script src="//vjs.zencdn.net/7.3.0/video.min.js"></script>
+
     <script src="/js/ws_comment.js"></script>
 </head>
 <body class="BG" background="/image/videoBG.jpg">

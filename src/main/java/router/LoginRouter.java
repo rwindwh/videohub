@@ -142,10 +142,10 @@ public class LoginRouter implements Registrable {
         Router.post("/sendtheemail", (request, response) ->
         {
             String email = request.getParameter("email");
-            char[] captcha = new char[6];
-            String chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            for (int i = 0; i < 6; i++) {
-                int a = (int) (Math.random() * 36);
+            char[] captcha = new char[4];
+            String chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+            for (int i = 0; i < 4; i++) {
+                int a = (int) (Math.random() * 62);
                 captcha[i] = chars.charAt(a);
             }
             String Captcha=String.valueOf(captcha);
@@ -166,7 +166,7 @@ public class LoginRouter implements Registrable {
             String captcha=request.getParameter("captcha");
             String sessioncaptcha=(String)request.getSession().getAttribute("captcha");
             String email=(String)request.getSession().getAttribute("email");
-            if(captcha.equalsIgnoreCase(sessioncaptcha)&&password.equals(password3))
+            if(captcha.equals(sessioncaptcha)&&password.equals(password3))
             {
                 DBTemplate.update("update videohub_user set password=? where email=?",new Object[]{
                         password,email
@@ -184,7 +184,7 @@ public class LoginRouter implements Registrable {
                String reason="False:";
                if(!password.equals(password3))
                reason+="The password entered for the second time is different from that entered for the first time!";
-               if(!captcha.equalsIgnoreCase(sessioncaptcha))
+               if(!captcha.equals(sessioncaptcha))
                reason+="The The captcha is incorrect!";
                 try {
                     reponse.sendRedirect("/changepassword.jsp?error=yes&reason="+reason);
