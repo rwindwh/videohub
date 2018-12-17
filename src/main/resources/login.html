@@ -47,13 +47,17 @@
                 $.cookie("password", "", {expires: -1});
             }
         }
-        var a=location.href;
-        var b=a.substring(a.lastIndexOf('=')+1);
-        if(b=='yes')
-        {
-            alert("登录失败！" +
-                "原因：用户名，密码，验证码为空或者错误！")
-        }
+
+        $(document).ready(function () {
+            var a = location.href;
+            var b = a.substring(a.lastIndexOf('=') + 1);
+            if (b === 'yes') {
+                $('.alert-danger').removeClass('hide').addClass('in')
+                $('.alert-success').addClass('hide')
+
+            }
+        });
+
     </script>
 </head>
 <body>
@@ -106,16 +110,28 @@
             </div>
 
         </div>
+
         <div class="row">
             <div class="col-md-6 col-md-offset-3 ">
                 <div class="panel panel-info">
-                    <div class="panel-heading">
+
+
+                    <div class="alert alert-danger alert-dismissable hide" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>登录失败！ 原因：用户名，密码，验证码为空或者错误！</strong>
+                    </div>
+
+                    <div class="alert alert-success" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="false">&times;</span>
+                        </button>
                         请输入用户名密码以登录videohub
                     </div>
-                    <div class="panel-body"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="false">&times;</span>
-                    </button>
 
+
+                    <div class="panel-body">
                         <form role="form" method="post" name="form1">
                             <div class="form-group">
                                 <label>用户名</label>
@@ -138,7 +154,7 @@
                                 <label>验证码</label>
                                 <div class=" form-inline">
                                     <input name="checkCode" class="form-control" type="text" placeholder="不区分大小写"/>
-                                    <img id="img"  src="checkcode"/>
+                                    <img id="img" src="checkcode"/>
                                     <button type="submit" class="btn glyphicon glyphicon-repeat" onclick="/changecheckcode"></button>
                                 </div>
                             </div>
@@ -177,7 +193,6 @@
 <script src="assets/js/jquery-1.10.2.js"></script>
 <!-- BOOTSTRAP SCRIPTS  -->
 <script src="assets/js/bootstrap.js"></script>
-<!-- CUSTOM SCRIPTS  -->
-<script src="assets/js/custom.js"></script>
+
 </body>
 </html>

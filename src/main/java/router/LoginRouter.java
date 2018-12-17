@@ -94,7 +94,7 @@ public class LoginRouter implements Registrable {
                     password1 = result.getString("password");}
                 });
                 if (username1!=null&&password1!=null&&severcheckcode.equalsIgnoreCase(usercheckcode) && username.equals(username1) && password.equals(password1)) {
-                    response.sendRedirect("/main.jsp");
+                    response.sendRedirect("/index.html");
                     request.getSession().setAttribute("username", username);
                 } else {
                     response.sendRedirect("/login.html?error=yes");
@@ -126,7 +126,7 @@ public class LoginRouter implements Registrable {
                     response.sendRedirect("/ok");
 
                 } else {
-                    response.sendRedirect("/repeat.jsp");
+                    response.sendRedirect("/repeat.html");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -165,7 +165,7 @@ public class LoginRouter implements Registrable {
                         password,email
                 });
                 try {
-                    request.getRequestDispatcher("/login.jsp").forward(request,reponse);
+                    request.getRequestDispatcher("/login.html").forward(request, reponse);
                 } catch (ServletException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
