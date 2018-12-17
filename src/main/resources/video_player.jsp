@@ -37,11 +37,11 @@
                     class="video-js"
                     controls
                     preload="auto"
-                    poster="//vjs.zencdn.net/v/oceans.png"
+                    poster="<%=request.getAttribute("video_url")%>.png"
                     data-setup='{}'>
-                <source src="<%=request.getAttribute("video")%>.mp4" type="video/mp4"></source>
-                <source src="<%=request.getAttribute("video")%>.webm" type="video/webm"></source>
-                <source src="<%=request.getAttribute("video")%>.ogv" type="video/ogg"></source>
+                <source src="<%=request.getAttribute("video_url")%>.mp4" type="video/mp4"></source>
+                <source src="<%=request.getAttribute("video_url")%>.webm" type="video/webm"></source>
+                <source src="<%=request.getAttribute("video_url")%>.ogv" type="video/ogg"></source>
                 <p class="vjs-no-js">
                     To view this video please enable JavaScript, and consider upgrading to a
                     web browser that
