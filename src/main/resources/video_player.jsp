@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <link href="//vjs.zencdn.net/7.3.0/video-js.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="./css/video_player.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../css/video_player.css" media="all">
     <script src="//vjs.zencdn.net/7.3.0/video.min.js"></script>
     <script src="/js/ws_comment.js"></script>
     <script src="/js/video_player.js"></script>
 </head>
 <body class="BG" background="/image/videoBG.jpg">
-<div>
+<div class="whole">
     <ul class="top-action">
         <li class="top-action-name">
             videoHub影院
@@ -27,7 +27,7 @@
     <div class="main">
         <div class="video">
             <div class="video-title">
-                <h3>This is a video title</h3>
+                <h2>This is a video title</h2>
             </div>
             <video
                     width="1000"
@@ -54,9 +54,11 @@
             <div class="comment-title">
                 <h3>实时评论</h3>
             </div>
+            <div class="comment-area">
             <input type="text" id="comment" value="" placeholder="输入join开始发言;输入leave离开;请友善发言~"/>
             <input type="button" value="发送" onclick="send()"/>
-            <div class="message_area" id="message_area">
+            </div>
+            <div class="message-area" id="message_area">
 
             </div>
         </div>
