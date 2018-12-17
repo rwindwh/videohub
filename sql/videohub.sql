@@ -27,6 +27,7 @@ CREATE TABLE `videohub_resource`  (
   `video_file_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '存放到服务器的视频文件的名字',
   `require_point` int(11) NULL DEFAULT NULL COMMENT '播放该视频需要的积分',
   `category` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '视频类别',
+  `video_url` varchar(255) CHARACTER SET utf8 NULL DEFAULT NULL COMMENT '视频存放地址',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
