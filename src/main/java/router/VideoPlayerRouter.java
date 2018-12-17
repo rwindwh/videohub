@@ -12,11 +12,12 @@ public class VideoPlayerRouter implements Registrable {
         Router.get("/video_player/*",(request,response)->{
             try{
                 String requestURI = request.getRequestURI();
-                String id = requestURI.substring(requestURI.lastIndexOf("/"));
+                String id = requestURI.substring(requestURI.lastIndexOf("/")+1);
                 System.out.println(requestURI);
-                DBTemplate.query("select id from videohub_resources where id='" + id + "'",result -> {
+                DBTemplate.query("select * from videohub_resources where id='" + id + "'",result -> {
                     if(result.next()){
                         String video_url = result.getString("video_url");
+                        System.out.println(video_url);
                         request.setAttribute("video_url",video_url);
                     }
                 });
