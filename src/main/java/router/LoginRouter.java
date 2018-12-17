@@ -74,7 +74,7 @@ public class LoginRouter implements Registrable {
         });
         Router.post("/changecheckcode", (request, reponse) -> {
             try {
-                request.getRequestDispatcher("login.jsp").forward(request, reponse);
+                request.getRequestDispatcher("/login.html").forward(request, reponse);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -85,6 +85,7 @@ public class LoginRouter implements Registrable {
                 String usercheckcode = request.getParameter("checkCode");
                 String username = request.getParameter("username");
                 String password = request.getParameter("password");
+                String email=request.getParameter("email");
                 HttpSession session = request.getSession();
                 String severcheckcode = (String) session.getAttribute("checkcode");
                 DBTemplate.query("select username,password from videohub_user where username='" + username + "'", result -> {
@@ -92,19 +93,11 @@ public class LoginRouter implements Registrable {
                     username1 = result.getString("username");
                     password1 = result.getString("password");}
                 });
-                if (severcheckcode.equalsIgnoreCase(usercheckcode) && username.equals(username1) && password.equals(password1)) {
+                if (username1!=null&&password1!=null&&severcheckcode.equalsIgnoreCase(usercheckcode) && username.equals(username1) && password.equals(password1)) {
                     response.sendRedirect("/main.jsp");
                     request.getSession().setAttribute("username", username);
                 } else {
-                    String finalReson = "Login false:";
-                    if (!username1.equals(username))
-                        finalReson += "The username does not exist! ";
-                    if (!password1.equals(password))
-                        finalReson += "The password is incorrect! ";
-                    if (!severcheckcode.equalsIgnoreCase(usercheckcode))
-                        finalReson += "The captcha is incorrect!";
-
-                    response.sendRedirect("/login.jsp?error=yes&reason=" + finalReson);
+                    response.sendRedirect("/login.html?error=yes");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -154,7 +147,7 @@ public class LoginRouter implements Registrable {
             try {
                 request.getSession().setAttribute("captcha", Captcha);
                 request.getSession().setAttribute("email",email);
-                response.sendRedirect("/changepassword.jsp");
+                response.sendRedirect("/changepassword.html");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -181,13 +174,8 @@ public class LoginRouter implements Registrable {
             }
             else
             {
-               String reason="False:";
-               if(!password.equals(password3))
-               reason+="The password entered for the second time is different from that entered for the first time!";
-               if(!captcha.equals(sessioncaptcha))
-               reason+="The The captcha is incorrect!";
                 try {
-                    reponse.sendRedirect("/changepassword.jsp?error=yes&reason="+reason);
+                    reponse.sendRedirect("/changepassword.html?error=yes");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -15,8 +15,8 @@ public class UserRouter implements Registrable {
                 request.setCharacterEncoding("UTF-8");
                 String username=(String)request.getSession().getAttribute("username");
                 User user = OrmTemplate.queryOne("select * from videohub_user where username='" + username + "'", User.class);
-                request.setAttribute("result",user);
-                request.getRequestDispatcher("/profile.jsp").forward(request,response);
+                request.setAttribute("results",user);
+                request.getRequestDispatcher("/profile.html").forward(request,response);
 
             }catch (Exception e)
             {
