@@ -8,17 +8,18 @@
     <!--[if IE]>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <![endif]-->
-    <title>Videohub</title>
+    <title><%=request.getAttribute("video_id")%></title>
     <link href="/assets/css/bootstrap.css" rel="stylesheet"/>
 
     <link href="/assets/css/font-awesome.css" rel="stylesheet"/>
 
     <link href="/assets/css/style.css" rel="stylesheet"/>
 
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+    <link href='http://fonts.googleapis.com/css?family=Capriola' rel='stylesheet' type='text/css'/>
+
+    <script src="/js/ws_comment.js"></script>
 
     <link href="//vjs.zencdn.net/7.3.0/video-js.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../css/video_player.css" media="all">
     <script src="//vjs.zencdn.net/7.3.0/video.min.js"></script>
 
     <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
@@ -84,11 +85,11 @@
             <div class="col-md-12">
                 <div class="navbar-collapse collapse ">
                     <ul id="menu-top" class="nav navbar-nav navbar-right">
-                        <li><a href="index.html">主页</a></li>
-                        <li><a href="login.html">登录</a></li>
-                        <li><a href="signup.html" class="menu-top-active">注册</a></li>
-                        <li><a href="profile.html">用户中心</a></li>
-                        <li><a href="pay.html">充值</a></li>
+                        <li><a href="/index.html">主页</a></li>
+                        <li><a href="/login.html">登录</a></li>
+                        <li><a href="/signup.html" class="menu-top-active">注册</a></li>
+                        <li><a href="/profile.html">用户中心</a></li>
+                        <li><a href="/pay.html">充值</a></li>
                     </ul>
                 </div>
             </div>
@@ -97,42 +98,50 @@
     </div>
 </section>
 <!-- MENU SECTION END-->
-<div class="main">
-    <div class="video">
-        <div class="video-title">
-            <h2>This is a video title</h2>
-        </div>
-        <video
-                width="1000"
-                height="625"
-                id="my-player"
-                class="video-js"
-                controls
-                preload="auto"
-                poster="<%=request.getAttribute("video_url")%>.png"
-                data-setup='{}'>
-            <source src="<%=request.getAttribute("video_url")%>.mp4" type="video/mp4"></source>
-            <source src="<%=request.getAttribute("video_url")%>.webm" type="video/webm"></source>
-            <source src="<%=request.getAttribute("video_url")%>.ogv" type="video/ogg"></source>
-            <p class="vjs-no-js">
-                To view this video please enable JavaScript, and consider upgrading to a
-                web browser that
-                <a href="http://videojs.com/html5-video-support/" target="_blank">
-                    supports HTML5 video
-                </a>
-            </p>
-        </video>
-    </div>
-    <div class="comment">
-        <div class="comment-title">
-            <h3>实时评论</h3>
-        </div>
-        <div class="comment-area">
-            <input type="text" id="comment" value="" placeholder="输入join开始发言;输入leave离开;请友善发言~"/>
-            <input type="button" value="发送" onclick="send()"/>
-        </div>
-        <div class="message-area" id="message_area">
+<div class="content-wrapper" style="padding-bottom: 50px">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-9 col-lg-9">
+                <video
+                        width="1000"
+                        height="625"
+                        id="my-player"
+                        class="video-js"
+                        controls
+                        preload="auto"
+                        poster="<%=request.getAttribute("video_url")%>.png"
+                        data-setup='{}'>
+                    <source src="<%=request.getAttribute("video_url")%>.mp4" type="video/mp4"></source>
+                    <source src="<%=request.getAttribute("video_url")%>.webm" type="video/webm"></source>
+                    <source src="<%=request.getAttribute("video_url")%>.ogv" type="video/ogg"></source>
+                    <p class="vjs-no-js">
+                        To view this video please enable JavaScript, and consider upgrading to a
+                        web browser that
+                        <a href="http://videojs.com/html5-video-support/" target="_blank">
+                            supports HTML5 video
+                        </a>
+                    </p>
+                </video>
+            </div>
+            <div class="col-xs-6 col-md-3 col-lg3">
 
+                <ul class="list-group" id="message_area">
+                    <li class="list-group-item">Cras justo odio</li>
+
+                </ul>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-9 col-lg-9">
+                <label for="comment">实时评论</label>
+                <div class="input-group">
+                    <input id="comment" type="text" class="form-control" placeholder="输入join开始发言;输入leave离开;请友善发言~">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" onclick="send()">发送</button>
+                      </span>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -141,9 +150,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                &copy; 2018 Videohub.org
+                &copy; 2018 Videohub.org. Check <a href="https://github.com/glut-blastingteam/videohub">here</a> to get
+                a free copy.
             </div>
-
         </div>
     </div>
 </section>
