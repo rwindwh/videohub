@@ -66,16 +66,16 @@
 
                 <div class="carousel-inner">
                     <div class="item active">
-                        <img src="poster/1.jpg" alt=""/>
+                        <img src="poster/1.jpg" href="/video/1.mp4" alt=""/>
                     </div>
                     <div class="item">
-                        <img src="poster/2.jpg" alt=""/>
+                        <img src="poster/2.jpg" href="/video/1.mp4" alt=""/>
                     </div>
                     <div class="item">
-                        <img src="poster/3.jpg" alt=""/>
+                        <img src="poster/3.jpg" href="/video/1.mp4" alt=""/>
                     </div>
                     <div class="item">
-                        <img src="poster/4.jpg" alt=""/>
+                        <img src="poster/4.jpg" href="/video/1.mp4" alt=""/>
                     </div>
                 </div>
                 <!--INDICATORS-->
@@ -98,46 +98,42 @@
         <div class="col-md-4 col-sm-4 col-xs-12">
             <div class="panel panel-primary ">
                 <div class="panel-heading">
-                    Recent Chat History
+                    最近评论
                 </div>
                 <div class="panel-body chat-widget-main">
                     <div class="chat-widget-left">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Lorem ipsum dolor.
+                        为吃醋做一顿饺子，为贺礼烧一座烟房，饺子没吃到嘴里，鸦片迷醉进鼻腔。为不老打一管针剂，为隐形做一件衣裳，不老却主动求死，隐形却光着皮囊。汉奸跪在地上如狗，侠客飞上屋檐如鸽，谁睡在丧钟里不醒，谁僵在火海里失声。躲得过爱情的子弹，拔不掉仇恨的齿牙，北平本是一座孤岛，海水退去便是江湖。
                     </div>
                     <div class="chat-widget-name-left">
                         <img class="media-object img-circle img-left-chat" src="assets/img/user2.png"/>
-                        <h4> Amanna Seiar</h4>
+                        <h4> 杨易</h4>
                         <h5>Time 2:00 pm at 25th july</h5>
                     </div>
                     <hr/>
                     <div class="chat-widget-right">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Lorem ipsum dolor sit amet.
+                        保护好姜文啊。全中国就剩这么一个还在用电影讲电影的导演啦。一声枪响，一个枪洞，三点血，一个然字成了，比亲眼看廖凡倒地可是爽多了。
                     </div>
                     <div class="chat-widget-name-right">
                         <img class="media-object img-circle img-right-chat" src="assets/img/user2.png"/>
-                        <h4> Amanna Seiar</h4>
+                        <h4> 谈一乐</h4>
                         <h5>Time 2:00 pm at 25th july</h5>
                     </div>
                     <hr/>
                     <div class="chat-widget-left">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Lorem ipsum dolor sit amet.
+                        “北洋三部曲”各有各的悲伤，《邪不压正》悲伤最甚。第三部集前两部之大成。只看表层是“杀死比尔”一样的复仇故事，姜文多了些深情。内核里还是“北洋三部曲”特有的，关于政治与历史的隐喻，都是“怎么就变成这样了呢？”的思考。密集，讲究的台词依旧是我的大爱，兑上十杯水也能品出酒味。是姜文想象中的民国北京房顶上上演的戏剧，是骨子里的幽默与孤独，是邪不压正。
                     </div>
                     <div class="chat-widget-name-left">
                         <img class="media-object img-circle img-left-chat" src="assets/img/user2.png"/>
-                        <h4> Amanna Seiar</h4>
+                        <h4>梁子鸿</h4>
                         <h5>Time 2:00 pm at 25th july</h5>
                     </div>
                     <hr/>
                     <div class="chat-widget-right">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Lorem ipsum dolor sit amet.
+                        “-不要再哭了，再哭就到了！-我压着速度呢”廖凡部分犀利狠辣如《无耻混蛋》，周韵部分仙逸飘渺如《聂隐娘》，彭于晏屋顶奔跑如《卧虎藏龙》复仇双刃剑如《三块广告牌》，许晴情义妖娆如《老炮儿》里的她和《太阳照常升起》里的陈冲…廖许边电话边啪啪、彭于晏屋顶裸奔、彭叫姜文爸爸…都极其情艳！
                     </div>
                     <div class="chat-widget-name-right">
                         <img class="media-object img-circle img-right-chat" src="assets/img/user2.png"/>
-                        <h4> Amanna Seiar</h4>
+                        <h4> 宋忠赋</h4>
                         <h5>Time 2:00 pm at 25th july</h5>
                     </div>
                     <hr/>
@@ -146,45 +142,24 @@
             </div>
         </div>
 
-        <div class="col-md-12 col-sm-12 col-xs-12">
+
+        <div th:each="v : ${videos}">
+            <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="col-md-12">
-                <h4 class="header-line">动漫番剧</h4>
+                <h4 class="header-line" th:text="${v.key}"></h4>
             </div>
-                    </div>
-
-
-        <div class="col-xs-3 col-md-3">
-            <a href="#" class="thumbnail">
-                <img src="/poster_index/1.jpg" alt="">
-            </a>
-            <div class="caption">
-                <h3>免费播放</h3>
             </div>
 
-        </div>
-        <div class="col-xs-3 col-md-3">
-            <a href="#" class="thumbnail">
-                <img src="/poster_index/2.jpg" alt="...">
-            </a>
-            <div class="caption">
-                <h3>免费播放</h3>
+            <div th:each="video : ${v.value}" class="col-xs-3 col-md-3">
+                <a th:href="${video.video_url}" class="thumbnail">
+                    <img th:src="@{'/poster_index/'+${video.video_file_name}}" alt="">
+                </a>
+                <div class="caption">
+                    <h3 th:text="${video.video_title}"></h3>
+                </div>
+
             </div>
-        </div>
-        <div class="col-xs-3 col-md-3">
-            <a href="#" class="thumbnail">
-                <img src="/poster_index/3.jpg" alt="...">
-            </a>
-            <div class="caption">
-                <h3>免费播放</h3>
-            </div>
-        </div>
-        <div class="col-xs-3 col-md-3">
-            <a href="#" class="thumbnail">
-                <img src="/poster_index/4.jpg" alt="...">
-            </a>
-            <div class="caption">
-                <h3>免费播放</h3>
-            </div>
+
         </div>
 
 
