@@ -1,5 +1,4 @@
-﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+﻿<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -50,7 +49,6 @@
                         <li><a href="signup.html">注册</a></li>
                         <li><a href="/profile" class="menu-top-active">用户中心</a></li>
                         <li><a href="pay.html">充值</a></li>
-                        <li><a href="video_player.html">播放</a></li>
                     </ul>
                 </div>
             </div>
@@ -70,6 +68,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
+
                 <div class="panel panel-default">
                     <div class="panel-heading">
                        个人基本信息：
@@ -79,6 +78,7 @@
                             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>用户名</th>
                                     <th>邮箱</th>
                                     <th>积分</th>
@@ -88,6 +88,7 @@
                                 </thead>
                                 <tbody>
                                 <tr th:each="result:${results}">
+                                    <td><img src="/assets/img/user2.png" alt="..." class="img-circle"></td>
                                     <td th:text="${result.username}"></td>
                                     <td th:text="${result.email}"></td>
                                     <td th:text="${result.point}"></td>

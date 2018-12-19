@@ -3,19 +3,21 @@ package router;
 import database.DBTemplate;
 import mvc.Router;
 import mvc.View;
+import util.DBAux;
 
 public class VideoPlayerRouter implements Registrable {
     @Override
     public void registerRouter() {
         Router.get("/video/{vid}", model -> {
-            if(model.get("username,")!=null){
-                return View.create("/index.html",model);
+            if (model.get("username") == null) {
+                model.set("videos", DBAux.getCategoriedMap());
+                return View.create("index.html", model);
             }
 
             String pathVar = model.getPathVar("vid");
             try {
-                int vid = Integer.parseInt(pathVar);
-                DBTemplate.query("select * from videohub_resource where id=?",
+                int vid = Integer.parseInt(pathVar.replace(".mp4", ""));
+                DBTemplate.query("select video_url,video_id from videohub_resource where id=?",
                         new Object[]{vid}, result -> {
                             if (result.next()) {
                                 String video_url = result.getString("video_url");
