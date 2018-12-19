@@ -1,6 +1,9 @@
 package router;
 
+import core.PropertiesHolder;
 import database.DBTemplate;
+import database.OrmTemplate;
+import domain.User;
 import mvc.Router;
 import mvc.View;
 
@@ -8,10 +11,21 @@ public class VideoRouter implements Registrable {
     @Override
     public void registerRouter() {
         Router.get("/player/{vid}", model -> {
-//            if (model.get("username") == null) {
-//                model.set("videos", DBAux.getCategoriedMap());
-//                return View.create("/login.html?error=yes", model);
-//            }
+            if (model.get("username") == null) {
+                return View.create("/login.html?error=yes");
+            }
+
+            int requirePoint = Integer.parseInt(PropertiesHolder.readProp("video.point"));
+
+            User u = OrmTemplate.queryOne("select * from videohub_user where username=?", new String[]{(String) model.get("username")}, User.class);
+
+            if (u.getPoint() >= requirePoint) {
+                DBTemplate.update("update videohub_user set point = " +
+                        ((u.getPoint() - requirePoint) >= 0 ? (u.getPoint() - requirePoint) : 0) +
+                        " where username='" + (String) model.get("username") + "'");
+            } else {
+                return View.create("/pay");
+            }
 
             String pathVar = model.getPathVar("vid");
             try {
@@ -31,8 +45,8 @@ public class VideoRouter implements Registrable {
                 // DO NOTHING
             }
 
-            if (!model.get("video_url").equals("-1")) {
-                return View.create("/player.html", model);
+            if (model.get("video_url") != null && !model.get("video_url").equals("-1")) {
+                return View.create("/vplayer.html", model);
             } else {
                 return View.create("/404.html");
             }

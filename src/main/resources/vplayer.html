@@ -17,36 +17,6 @@
     <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
-    <script>
-        function Save() {
-            if ($("#rememberMe").prop("checked")) {
-                var str_username = $("#NameText").val();//用户名
-                var str_password = $("#inputPassword").val();//密码
-                $.cookie("rmbUser", "true", {expires: 7}); //存储一个带7天期限的cookie
-                $.cookie("username", str_username, {expires: 7});
-                $.cookie("password", str_password, {expires: 7});
-            }
-            else {
-                $.cookie("rmbUser", "false", {expire: -1});
-                $.cookie("username", "", {expires: -1});
-                $.cookie("password", "", {expires: -1});
-            }
-
-            if ($("#autoLogin").prop("checked")) {
-                var str_username = $("#NameText").val();
-                var str_password = $("#inputPassword").val();
-                $.cookie("auto", "true", {expires: 7}); //存储一个带7天期限的cookie
-                $.cookie("username", str_username, {expires: 7});
-                $.cookie("password", str_password, {expires: 7});
-            }
-            else {
-                $.cookie("auto", "false", {expire: -1});
-                $.cookie("username", "", {expires: -1});
-                $.cookie("password", "", {expires: -1});
-            }
-        }
-
-    </script>
 </head>
 <body>
 <div class="navbar navbar-inverse set-radius-zero">
@@ -156,8 +126,8 @@
 <!-- FOOTER SECTION END-->
 <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
 <!-- CORE JQUERY  -->
-<script src="assets/js/jquery-1.10.2.js"></script>
+<script src="/assets/js/jquery-1.10.2.js"></script>
 <!-- BOOTSTRAP SCRIPTS  -->
-<script src="assets/js/bootstrap.js"></script>
+<script src="/assets/js/bootstrap.js"></script>
 </body>
 </html>
