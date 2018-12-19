@@ -123,7 +123,7 @@ public class LoginRouter implements Registrable {
                     });
                     request.getSession().setAttribute("username", username);
 
-                    response.sendRedirect("/ok");
+                    response.sendRedirect("/index.html");
 
                 } else {
                     response.sendRedirect("/repeat.html");

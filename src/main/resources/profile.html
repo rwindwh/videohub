@@ -34,7 +34,7 @@
         </div>
 
         <div class="right-div">
-            <a href="#" class="btn btn-info pull-right">注销登录</a>
+            <a href="/quit" class="btn btn-info pull-right">注销登录</a>
         </div>
     </div>
 </div>
@@ -50,6 +50,7 @@
                         <li><a href="signup.html">注册</a></li>
                         <li><a href="/profile" class="menu-top-active">用户中心</a></li>
                         <li><a href="pay.html">充值</a></li>
+                        <li><a href="video_play.html">播放</a></li>
                     </ul>
                 </div>
             </div>
@@ -62,17 +63,16 @@
     <div class="container">
         <div class="row pad-botm">
             <div class="col-md-12">
-                <h4 class="header-line">TABLE EXAMPLES</h4>
+                <h4 class="header-line">个人中心</h4>
 
             </div>
 
         </div>
         <div class="row">
             <div class="col-md-12">
-                <!-- Advanced Tables -->
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Advanced Tables
+                       个人基本信息：
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -87,22 +87,18 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-
                                 <tr th:each="result:${results}">
                                     <td th:text="${result.username}"></td>
                                     <td th:text="${result.email}"></td>
                                     <td th:text="${result.point}"></td>
                                     <td th:text="${result.last_login_time}"></td>
-
                                 </tr>
-
                                 </tbody>
                             </table>
                         </div>
 
                     </div>
                 </div>
-                <!--End Advanced Tables -->
             </div>
         </div>
     </div>

@@ -1,10 +1,12 @@
 package domain;
 
+import java.util.Date;
+
 public class User {
     private String username=null;
     private String password=null;
     private String email=null;
-    private String last_login_time=null;
+    private Date last_login_time=null;
     private long point=0;
     private String avatar_url;
     public String getUsername()
@@ -28,7 +30,7 @@ public class User {
         return email;
     }
 
-    public String getLast_login_time() {
+    public Date getLast_login_time() {
         return last_login_time;
     }
 
@@ -40,7 +42,7 @@ public class User {
         this.email = email;
     }
 
-    public void setLast_login_time(String last_login_time) {
+    public void setLast_login_time(Date last_login_time) {
         this.last_login_time = last_login_time;
     }
 
