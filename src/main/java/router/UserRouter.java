@@ -12,7 +12,7 @@ public class UserRouter implements Registrable {
     @Override
     public void registerRouter() {
         Router.get("/quit",(request,response)->{
-            request.getSession().invalidate();
+            request.getSession().removeAttribute("username");
             try {
                 response.sendRedirect("/login.html");
             } catch (IOException e) {

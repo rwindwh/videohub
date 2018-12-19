@@ -94,8 +94,9 @@ public class LoginRouter implements Registrable {
                     password1 = result.getString("password");}
                 });
                 if (username1!=null&&password1!=null&&severcheckcode.equalsIgnoreCase(usercheckcode) && username.equals(username1) && password.equals(password1)) {
-                    response.sendRedirect("/index.html");
+
                     request.getSession().setAttribute("username", username);
+                    response.sendRedirect("/index.html");
                 } else {
                     response.sendRedirect("/login.html?error=yes");
                 }
