@@ -16,8 +16,7 @@
 
 [sql文件](sql/videohub.sql)
 
-# 参考示例
-以下仅供参考，开发时请怎么好看怎么来
+# 效果预览
 ![](docs/1.png)
 ![](docs/2.png)
 ![](docs/3.png)

@@ -1,18 +1,16 @@
 package router;
 
 import mvc.Router;
-
-import java.io.IOException;
+import mvc.View;
 
 public class PayRouter implements Registrable {
     @Override
     public void registerRouter() {
-        Router.get("/charge", (req, resp) -> {
-            try {
-                resp.getWriter().println("charge page");
-            } catch (IOException e) {
-                e.printStackTrace();
+        Router.get("/pay", model -> {
+            if (model.get("username") == null) {
+                return View.create("/login.html?error=yes");
             }
+            return View.create("/pay.html");
         });
     }
 }

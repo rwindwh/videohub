@@ -29,31 +29,9 @@ public class UserRouter implements Registrable {
                 System.out.println(users);
                 return View.create("/profile.html", model);
             } else {
-                return View.create("/login.html");
+                return View.create("/login.html?error=yes");
             }
         });
-
-//        Router.get("/profile",(request,response)->{
-//            String username = (String) request.getSession().getAttribute("username");
-//            if(username!=null) {
-//                try {
-//                    request.setCharacterEncoding("UTF-8");
-//                    User user = OrmTemplate.queryOne("select * from videohub_user where username='" + username + "'", User.class);
-//                    request.setAttribute("results", user);
-//                    request.getRequestDispatcher("/profile.html").forward(request, response);
-//
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//            else
-//                try {
-//                   response.sendRedirect("/login.html");
-//                }catch (Exception e)
-//                {
-//                    e.printStackTrace();
-//                }
-//        });
 
     }
 }

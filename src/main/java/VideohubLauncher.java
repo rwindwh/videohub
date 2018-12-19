@@ -9,7 +9,7 @@ public class VideohubLauncher {
         new PayRouter().registerRouter();
         new IndexRouter().registerRouter();
         new LoginRouter().registerRouter();
-        new VideoPlayerRouter().registerRouter();
+        new VideoRouter().registerRouter();
         new UserRouter().registerRouter();
 
         Sparrow.fly();

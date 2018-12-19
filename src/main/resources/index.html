@@ -44,7 +44,7 @@
                         <li><a href="/login.html">登录</a></li>
                         <li><a href="/signup.html">注册</a></li>
                         <li><a href="/profile">用户中心</a></li>
-                        <li><a href="/pay.html">充值</a></li>
+                        <li><a href="/pay">充值</a></li>
                     </ul>
                 </div>
             </div>
@@ -151,7 +151,7 @@
             </div>
 
             <div th:each="video : ${v.value}" class="col-xs-3 col-md-3">
-                <a th:href="${video.video_url}" class="thumbnail">
+                <a th:href="@{'/player/'+${video.id}}" class="thumbnail">
                     <img th:src="@{'/poster_index/'+${video.video_file_name}}" alt="">
                 </a>
                 <div class="caption">

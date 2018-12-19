@@ -32,28 +32,50 @@ CREATE TABLE `videohub_resource` (
 -- ----------------------------
 -- Records of videohub_resource
 -- ----------------------------
-INSERT INTO `videohub_resource` VALUES ('1', 'AGE OF HEROES', '1.jpg', '50', '动作片', '/video_player/1');
-INSERT INTO `videohub_resource` VALUES ('2', 'X战警', '2.jpg', '50', '科幻片', '/video_player/1');
-INSERT INTO `videohub_resource` VALUES ('3', '逆战', '3.jpg', '50', '动作片', '/video_player/1');
-INSERT INTO `videohub_resource` VALUES ('4', '魔兽', '4.jpg', '50', '科幻片', '/video_player/1');
-INSERT INTO `videohub_resource` VALUES ('5', 'OCTPOB', '5.jpg', '50', '科幻片', '/video_player/1');
-INSERT INTO `videohub_resource` VALUES ('6', '蓝风筝', '6.jpg', '50', '纪实片', '/video_player/1');
-INSERT INTO `videohub_resource` VALUES ('7', '无人区', '7.jpg', '50', '动作片', '/video_player/1');
-INSERT INTO `videohub_resource` VALUES ('8', 'PRINCE OF PERSIA', '8.jpg', '50', '动作片', '/video_player/1');
-INSERT INTO `videohub_resource` VALUES ('9', 'AVA', '9.jpg', '50', '科幻片', '/video_player/1');
-INSERT INTO `videohub_resource` VALUES ('10', '巨齿鲨', '10.jpg', '50', '纪实片', '/video_player/1');
-INSERT INTO `videohub_resource` VALUES ('11', 'AVENGERS2', '11.jpg', '50', '纪实片', '/video_player/1');
-INSERT INTO `videohub_resource` VALUES ('12', '小萝莉的猴神大叔', '12.jpg', '50', '纪实片', '/video_player/2');
-INSERT INTO `videohub_resource` VALUES ('13', '阿凡达', '13.jpg', '50', '科幻片', '/video_player/2');
-INSERT INTO `videohub_resource` VALUES ('14', '双城计中计', '14.jpg', '50', '动作片', '/video_player/2');
-INSERT INTO `videohub_resource` VALUES ('15', '骑士', '15.jpg', '50', '纪实片', '/video_player/2');
-INSERT INTO `videohub_resource` VALUES ('16', '逆战2', '16.jpg', '50', '科幻片', '/video_player/2');
-INSERT INTO `videohub_resource` VALUES ('17', 'Fate', '17.jpg', '50', '动漫片', '/video_player/2');
-INSERT INTO `videohub_resource` VALUES ('18', '白胖次', '18.jpg', '50', '动漫片', '/video_player/2');
-INSERT INTO `videohub_resource` VALUES ('19', '拳皇', '19.jpg', '50', '动漫片', '/video_player/2');
-INSERT INTO `videohub_resource` VALUES ('20', 'RE0', '20.jpg', '50', '动漫片', '/video_player/2');
-INSERT INTO `videohub_resource` VALUES ('21', '二代目', '21.jpg', '50', '纪实片', '/video_player/2');
-INSERT INTO `videohub_resource` VALUES ('22', '神奇宝贝', '22.jpg', '50', '动漫片', '/video_player/2');
+INSERT INTO `videohub_resource`
+VALUES ('1', 'AGE OF HEROES', '1.jpg', '50', '动作片', '/video/1');
+INSERT INTO `videohub_resource`
+VALUES ('2', 'X战警', '2.jpg', '50', '科幻片', '/video/1');
+INSERT INTO `videohub_resource`
+VALUES ('3', '逆战', '3.jpg', '50', '动作片', '/video/1');
+INSERT INTO `videohub_resource`
+VALUES ('4', '魔兽', '4.jpg', '50', '科幻片', '/video/1');
+INSERT INTO `videohub_resource`
+VALUES ('5', 'OCTPOB', '5.jpg', '50', '科幻片', '/video/1');
+INSERT INTO `videohub_resource`
+VALUES ('6', '蓝风筝', '6.jpg', '50', '纪实片', '/video/1');
+INSERT INTO `videohub_resource`
+VALUES ('7', '无人区', '7.jpg', '50', '动作片', '/video/1');
+INSERT INTO `videohub_resource`
+VALUES ('8', 'PRINCE OF PERSIA', '8.jpg', '50', '动作片', '/video/1');
+INSERT INTO `videohub_resource`
+VALUES ('9', 'AVA', '9.jpg', '50', '科幻片', '/video/1');
+INSERT INTO `videohub_resource`
+VALUES ('10', '巨齿鲨', '10.jpg', '50', '纪实片', '/video/1');
+INSERT INTO `videohub_resource`
+VALUES ('11', 'AVENGERS2', '11.jpg', '50', '纪实片', '/video/1');
+INSERT INTO `videohub_resource`
+VALUES ('12', '小萝莉的猴神大叔', '12.jpg', '50', '纪实片', '/video/2');
+INSERT INTO `videohub_resource`
+VALUES ('13', '阿凡达', '13.jpg', '50', '科幻片', '/video/2');
+INSERT INTO `videohub_resource`
+VALUES ('14', '双城计中计', '14.jpg', '50', '动作片', '/video/2');
+INSERT INTO `videohub_resource`
+VALUES ('15', '骑士', '15.jpg', '50', '纪实片', '/video/2');
+INSERT INTO `videohub_resource`
+VALUES ('16', '逆战2', '16.jpg', '50', '科幻片', '/video/2');
+INSERT INTO `videohub_resource`
+VALUES ('17', 'Fate', '17.jpg', '50', '动漫片', '/video/2');
+INSERT INTO `videohub_resource`
+VALUES ('18', '白胖次', '18.jpg', '50', '动漫片', '/video/2');
+INSERT INTO `videohub_resource`
+VALUES ('19', '拳皇', '19.jpg', '50', '动漫片', '/video/2');
+INSERT INTO `videohub_resource`
+VALUES ('20', 'RE0', '20.jpg', '50', '动漫片', '/video/2');
+INSERT INTO `videohub_resource`
+VALUES ('21', '二代目', '21.jpg', '50', '纪实片', '/video/2');
+INSERT INTO `videohub_resource`
+VALUES ('22', '神奇宝贝', '22.jpg', '50', '动漫片', '/video/2');
 
 -- ----------------------------
 -- Table structure for videohub_user
