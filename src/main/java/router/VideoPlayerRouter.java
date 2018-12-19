@@ -7,6 +7,15 @@ import mvc.View;
 public class VideoPlayerRouter implements Registrable {
     @Override
     public void registerRouter() {
+
+        Router.get("/video_player",(request,response) -> {
+            try {
+                request.getRequestDispatcher("/404.html").forward(request, response);
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        });
         Router.get("/video_player/*", (request,response) -> {
             try{
                 String requestURI = request.getRequestURI();

@@ -123,13 +123,16 @@
                     </p>
                 </video>
             </div>
-            <div class="col-xs-6 col-md-3 col-lg3">
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="panel panel-primary ">
+                    <div class="panel-heading">
+                        Comment
+                    </div>
+                    <div class="panel-body chat-widget-main" id="message_area">
 
-                <ul class="list-group" id="message_area">
-                    <li class="list-group-item">Cras justo odio</li>
+                    </div>
 
-                </ul>
-
+                </div>
             </div>
         </div>
         <div class="row">
