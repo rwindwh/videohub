@@ -2,6 +2,7 @@ package router;
 
 import database.DBTemplate;
 import mvc.Router;
+import sun.misc.BASE64Encoder;
 import tool.MailWorker;
 
 import javax.imageio.ImageIO;
@@ -12,6 +13,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.security.MessageDigest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -19,7 +21,6 @@ import java.util.Date;
 public class LoginRouter implements Registrable {
     static String username1 = null;
     static String password1 = null;
-    static String username2 = null;
 
     @Override
     public void registerRouter() {
@@ -93,7 +94,13 @@ public class LoginRouter implements Registrable {
                     username1 = result.getString("username");
                     password1 = result.getString("password");}
                 });
-                if (username1!=null&&password1!=null&&severcheckcode.equalsIgnoreCase(usercheckcode) && username.equals(username1) && password.equals(password1)) {
+                byte[] oldBytes=password.getBytes();
+                MessageDigest md;
+                md=MessageDigest.getInstance("MD5");
+                byte[] newBytes=md.digest(oldBytes);
+                BASE64Encoder encoder=new BASE64Encoder();
+                String newStr=encoder.encode(newBytes);
+                if (username1!=null&&password1!=null&&severcheckcode.equalsIgnoreCase(usercheckcode) && username.equals(username1) && newStr.equals(password1)) {
 
                     request.getSession().setAttribute("username", username);
                     response.sendRedirect("/index.html");
@@ -110,25 +117,41 @@ public class LoginRouter implements Registrable {
                 request.setCharacterEncoding("UTF-8");
                 String username = request.getParameter("username");
                 String password = request.getParameter("password");
+                byte[] oldBytes=password.getBytes();
+                MessageDigest md;
+                md=MessageDigest.getInstance("MD5");
+                byte[] newBytes=md.digest(oldBytes);
+                BASE64Encoder encoder=new BASE64Encoder();
+                String newStr=encoder.encode(newBytes);
                 String email = request.getParameter("email");
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
                 String Date = simpleDateFormat.format(new Date());
                 DBTemplate.query("select username from videohub_user where username=?", new Object[]{username}, result -> {
 
+                    String username2=null;
                     if(result.next())
                     username2 = result.getString("username");
+                    if (username2==null) {
+                        DBTemplate.insert("insert into videohub_user(username,password,avatar_url,email,point,last_login_time) value(?,?,?,?,?,?)",new Object[]{
+                                username,newStr,null,email,200,Date
+                        });
+                        request.getSession().setAttribute("username", username);
+
+                        try {
+                            response.sendRedirect("/index.html");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                    } else {
+                        try {
+                            response.sendRedirect("/signup.html?error=ok");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 });
-                if (username2 != username) {
-                    DBTemplate.insert("insert into videohub_user(username,password,avatar_url,email,point,last_login_time) value(?,?,?,?,?,?)",new Object[]{
-                            username,password,null,email,200,Date
-                    });
-                    request.getSession().setAttribute("username", username);
 
-                    response.sendRedirect("/index.html");
-
-                } else {
-                    response.sendRedirect("/repeat.html");
-                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
