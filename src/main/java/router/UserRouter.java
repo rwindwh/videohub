@@ -22,15 +22,16 @@ public class UserRouter implements Registrable {
             }
         });
         Router.get("/profile", model -> {
-            if (null != model.get("username")) {
-                List<User> users = OrmTemplate.queryList("select * from videohub_user where username=?",
-                        new String[]{(String) model.get("username")}, User.class);
-                model.set("results", users);
-                System.out.println(users);
-                return View.create("/profile.html", model);
-            } else {
+            if (model.get("username") == null) {
                 return View.create("/login.html?error=yes");
             }
+
+            List<User> users = OrmTemplate.queryList("select * from videohub_user where username=?",
+                    new String[]{(String) model.get("username")}, User.class);
+            model.set("results", users);
+            System.out.println(users);
+            return View.create("/profile.html", model);
+
         });
 
     }

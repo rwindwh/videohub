@@ -2,8 +2,8 @@ package router;
 
 import database.DBTemplate;
 import mvc.Router;
-import sun.misc.BASE64Encoder;
 import tool.MailWorker;
+import util.Encrypted;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
@@ -13,7 +13,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.security.MessageDigest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -86,7 +85,6 @@ public class LoginRouter implements Registrable {
                 String usercheckcode = request.getParameter("checkCode");
                 String username = request.getParameter("username");
                 String password = request.getParameter("password");
-                String email=request.getParameter("email");
                 HttpSession session = request.getSession();
                 String severcheckcode = (String) session.getAttribute("checkcode");
                 DBTemplate.query("select username,password from videohub_user where username='" + username + "'", result -> {
@@ -94,13 +92,11 @@ public class LoginRouter implements Registrable {
                     username1 = result.getString("username");
                     password1 = result.getString("password");}
                 });
-                byte[] oldBytes=password.getBytes();
-                MessageDigest md;
-                md=MessageDigest.getInstance("MD5");
-                byte[] newBytes=md.digest(oldBytes);
-                BASE64Encoder encoder=new BASE64Encoder();
-                String newStr=encoder.encode(newBytes);
-                if (username1!=null&&password1!=null&&severcheckcode.equalsIgnoreCase(usercheckcode) && username.equals(username1) && newStr.equals(password1)) {
+
+                if (username1 != null && password1 != null
+                        && severcheckcode.equalsIgnoreCase(usercheckcode)
+                        && username.equals(username1)
+                        && Encrypted.enryptePassword(password).equals(password1)) {
 
                     request.getSession().setAttribute("username", username);
                     response.sendRedirect("/index.html");
@@ -117,12 +113,6 @@ public class LoginRouter implements Registrable {
                 request.setCharacterEncoding("UTF-8");
                 String username = request.getParameter("username");
                 String password = request.getParameter("password");
-                byte[] oldBytes=password.getBytes();
-                MessageDigest md;
-                md=MessageDigest.getInstance("MD5");
-                byte[] newBytes=md.digest(oldBytes);
-                BASE64Encoder encoder=new BASE64Encoder();
-                String newStr=encoder.encode(newBytes);
                 String email = request.getParameter("email");
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
                 String Date = simpleDateFormat.format(new Date());
@@ -133,7 +123,7 @@ public class LoginRouter implements Registrable {
                     username2 = result.getString("username");
                     if (username2==null) {
                         DBTemplate.insert("insert into videohub_user(username,password,avatar_url,email,point,last_login_time) value(?,?,?,?,?,?)",new Object[]{
-                                username,newStr,null,email,200,Date
+                                username, Encrypted.enryptePassword(password), null, email, 200, Date
                         });
                         request.getSession().setAttribute("username", username);
 
@@ -186,13 +176,11 @@ public class LoginRouter implements Registrable {
             if(captcha.equals(sessioncaptcha)&&password.equals(password3))
             {
                 DBTemplate.update("update videohub_user set password=? where email=?",new Object[]{
-                        password,email
+                        Encrypted.enryptePassword(password), email
                 });
                 try {
                     request.getRequestDispatcher("/login.html").forward(request, reponse);
-                } catch (ServletException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
+                } catch (ServletException | IOException e) {
                     e.printStackTrace();
                 }
             }
