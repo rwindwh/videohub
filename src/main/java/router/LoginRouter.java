@@ -85,7 +85,6 @@ public class LoginRouter implements Registrable {
                 String usercheckcode = request.getParameter("checkCode");
                 String username = request.getParameter("username");
                 String password = request.getParameter("password");
-                String email=request.getParameter("email");
                 HttpSession session = request.getSession();
                 String severcheckcode = (String) session.getAttribute("checkcode");
                 DBTemplate.query("select username,password from videohub_user where username='" + username + "'", result -> {
