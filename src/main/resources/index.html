@@ -147,8 +147,8 @@
             <div class="col-xs-12 col-md-12">
                 <h4 class="header-line" th:text="${v.key}"></h4>
             </div>
-            <div th:each="video,st : ${v.value}" th:class="${st.index%4==0}?'row'">
-                <div class="col-xs-3 col-md-3">
+            <div th:each="video,st : ${v.value}">
+                <div class="col-xs-3 col-md-3" style="width: 280px;height: 430px">
                     <a th:href="@{'/player/'+${video.id}}" class="thumbnail">
                         <img th:src="@{'/poster_index/'+${video.video_file_name}}" alt="">
                     </a>
